@@ -1,0 +1,9 @@
+def extract_features(epoch):
+    psd = epoch.compute_psd(fmin=8, fmax=30)
+
+    x = psd.get.data()#feature
+    y = epoch.events[:, -1]#label
+
+    x = x.reshape(len(x), -1)
+
+    return x,y

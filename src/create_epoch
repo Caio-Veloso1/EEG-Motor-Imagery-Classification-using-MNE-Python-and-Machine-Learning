@@ -1,0 +1,17 @@
+import mne
+
+def create_epoch(raw):
+    events, event_id = mne.events_from_annotations(raw)
+    
+    epoch = mne.Epochs(
+        raw,
+        events,
+        event_id,
+        tmin=0,
+        tmax=4,
+        baseline=None,
+        preload=True
+        )
+
+    return epoch
+

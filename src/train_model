@@ -1,0 +1,23 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+
+def train(x, y):
+    x_train, x_test, y_train, y_test = train_test_split(x,y)
+
+    model = RandomForestClassifier()
+    model.fit(x_train, y_train)
+    
+    acc = model.score(x_test, y_test)
+
+    y_pred = model.predict(x_test)
+    cm = confusion_matrix(y_test, y_pred)
+
+    disp = ConfusionMatrixDisplay(confusion_matrix = cm, display_labels = model.classes_)
+    disp.plot(cmap=plt.cm.Blues)
+    plt.title("Matriz de Confusão - RandomForest")
+    plt.show()
+
+
+    return model, acc
